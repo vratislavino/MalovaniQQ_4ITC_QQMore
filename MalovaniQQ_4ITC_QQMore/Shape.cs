@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace MalovaniQQ_4ITC_QQMore
 {
+    [Serializable]
     public abstract class Shape
     {
         protected int x;
@@ -42,6 +43,21 @@ namespace MalovaniQQ_4ITC_QQMore
             outlinePen.DashPattern = new float[] { 5, 5 };
         }
 
+        public Shape(ShapeDTO dto)
+        {
+            this.x = dto.x;
+            this.y = dto.y;
+            this.width = dto.width;
+            this.height = dto.height;
+            this.color = Color.FromArgb(dto.r, dto.g, dto.b);
+            this.pen = new Pen(color, 8);
+            this.brush = new SolidBrush(color);
+            this.filled = dto.filled;
+
+            outlinePen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            outlinePen.DashPattern = new float[] { 5, 5 };
+        }
+
         public virtual void Draw(Graphics g) { 
             
             if(highlighted)
@@ -67,6 +83,43 @@ namespace MalovaniQQ_4ITC_QQMore
         {
             this.x = x - mouseDragOffsetX;
             this.y = y - mouseDragOffsetY;
+        }
+
+        public ShapeDTO GetDTO()
+        {
+            return new ShapeDTO(this);
+        }
+
+        [Serializable]
+        public class ShapeDTO
+        {
+            public int x;
+            public int y;
+            public int width;
+            public int height;
+            public int r;
+            public int g;
+            public int b;
+            public bool filled;
+
+            public Type type;
+
+            public ShapeDTO()
+            {
+            }
+
+            public ShapeDTO(Shape s)
+            {
+                this.x = s.x;
+                this.y = s.y;
+                this.width = s.width;
+                this.height = s.height;
+                this.r = s.color.R;
+                this.g = s.color.G;
+                this.b = s.color.B;
+                this.filled = s.filled;
+                this.type = s.GetType();
+            }
         }
     }
 }

@@ -12,6 +12,9 @@ namespace MalovaniQQ_4ITC_QQMore
         {
         }
 
+
+        public Circle(ShapeDTO dto) : base(dto) { }
+
         public override void Draw(Graphics g)
         {
             if(filled)

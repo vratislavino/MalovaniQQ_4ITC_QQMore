@@ -13,7 +13,7 @@ namespace MalovaniQQ_4ITC_QQMore
     public partial class Canvas : UserControl
     {
         private List<Shape> shapes = new List<Shape>();
-        public IReadOnlyList<Shape> Shapes => shapes;
+        public List<Shape> Shapes => shapes;
 
         private Shape highlightedShape;
         private bool holdingShape = false;
@@ -28,6 +28,13 @@ namespace MalovaniQQ_4ITC_QQMore
         {
             shapes.Add(shape);
             Invalidate();
+        }
+
+        public void ClearShapes()
+        {
+            shapes.Clear();
+            Invalidate();
+            highlightedShape = null;
         }
 
         private void Canvas_Paint(object sender, PaintEventArgs e)
@@ -46,9 +53,11 @@ namespace MalovaniQQ_4ITC_QQMore
             if(holdingShape)
             {
                 highlightedShape.SetPosition(e.X, e.Y);
+                Invalidate();
+                return;
             }
 
-            var shape = shapes.FirstOrDefault(s => s.IsMouseOver(e.X, e.Y));
+            var shape = shapes.LastOrDefault(s => s.IsMouseOver(e.X, e.Y));
             if (shape != null)
             {
                 if (highlightedShape != shape)

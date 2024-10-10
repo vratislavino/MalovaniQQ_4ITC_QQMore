@@ -39,6 +39,9 @@
             saveToolStripMenuItem = new ToolStripMenuItem();
             loadToolStripMenuItem = new ToolStripMenuItem();
             addMoreShapesToolStripMenuItem = new ToolStripMenuItem();
+            statusStrip1 = new StatusStrip();
+            toolStripProgressBar1 = new ToolStripProgressBar();
+            toolStripStatusLabel1 = new ToolStripStatusLabel();
             canvas1 = new Canvas();
             colorDialog1 = new ColorDialog();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -46,6 +49,7 @@
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
             menuStrip1.SuspendLayout();
+            statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // splitContainer1
@@ -66,6 +70,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            splitContainer1.Panel2.Controls.Add(statusStrip1);
             splitContainer1.Panel2.Controls.Add(canvas1);
             splitContainer1.Size = new Size(1294, 856);
             splitContainer1.SplitterDistance = 67;
@@ -80,10 +85,11 @@
             button3.TabIndex = 5;
             button3.Text = "Clear";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // button2
             // 
-            button2.Location = new Point(319, 31);
+            button2.Location = new Point(464, 31);
             button2.Name = "button2";
             button2.Size = new Size(94, 29);
             button2.TabIndex = 4;
@@ -94,7 +100,7 @@
             // button1
             // 
             button1.BackColor = Color.Red;
-            button1.Location = new Point(253, 33);
+            button1.Location = new Point(398, 33);
             button1.Name = "button1";
             button1.Size = new Size(60, 29);
             button1.TabIndex = 3;
@@ -104,7 +110,7 @@
             // checkBox1
             // 
             checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(169, 33);
+            checkBox1.Location = new Point(314, 33);
             checkBox1.Name = "checkBox1";
             checkBox1.Size = new Size(67, 24);
             checkBox1.TabIndex = 2;
@@ -113,10 +119,11 @@
             // 
             // comboBox1
             // 
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox1.FormattingEnabled = true;
             comboBox1.Location = new Point(12, 31);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(151, 28);
+            comboBox1.Size = new Size(296, 28);
             comboBox1.TabIndex = 1;
             // 
             // menuStrip1
@@ -139,20 +146,46 @@
             // saveToolStripMenuItem
             // 
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new Size(208, 26);
+            saveToolStripMenuItem.Size = new Size(224, 26);
             saveToolStripMenuItem.Text = "Save";
+            saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
             // 
             // loadToolStripMenuItem
             // 
             loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            loadToolStripMenuItem.Size = new Size(208, 26);
+            loadToolStripMenuItem.Size = new Size(224, 26);
             loadToolStripMenuItem.Text = "Load";
+            loadToolStripMenuItem.Click += loadToolStripMenuItem_Click;
             // 
             // addMoreShapesToolStripMenuItem
             // 
             addMoreShapesToolStripMenuItem.Name = "addMoreShapesToolStripMenuItem";
-            addMoreShapesToolStripMenuItem.Size = new Size(208, 26);
+            addMoreShapesToolStripMenuItem.Size = new Size(224, 26);
             addMoreShapesToolStripMenuItem.Text = "Add more shapes";
+            addMoreShapesToolStripMenuItem.Click += addMoreShapesToolStripMenuItem_Click;
+            // 
+            // statusStrip1
+            // 
+            statusStrip1.ImageScalingSize = new Size(20, 20);
+            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripProgressBar1, toolStripStatusLabel1 });
+            statusStrip1.Location = new Point(0, 763);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new Size(1294, 22);
+            statusStrip1.TabIndex = 1;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripProgressBar1
+            // 
+            toolStripProgressBar1.Name = "toolStripProgressBar1";
+            toolStripProgressBar1.Size = new Size(100, 18);
+            toolStripProgressBar1.Visible = false;
+            // 
+            // toolStripStatusLabel1
+            // 
+            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            toolStripStatusLabel1.Size = new Size(62, 20);
+            toolStripStatusLabel1.Text = "Saving...";
+            toolStripStatusLabel1.Visible = false;
             // 
             // canvas1
             // 
@@ -173,13 +206,17 @@
             MainMenuStrip = menuStrip1;
             Name = "Form1";
             Text = "Form1";
+            Load += Form1_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();
             splitContainer1.Panel2.ResumeLayout(false);
+            splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -198,5 +235,8 @@
         private ColorDialog colorDialog1;
         private Button button3;
         private Button button2;
+        private StatusStrip statusStrip1;
+        private ToolStripProgressBar toolStripProgressBar1;
+        private ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
