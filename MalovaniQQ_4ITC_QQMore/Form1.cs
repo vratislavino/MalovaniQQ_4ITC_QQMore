@@ -1,3 +1,4 @@
+using System;
 using System.Reflection;
 
 namespace MalovaniQQ_4ITC_QQMore
@@ -5,7 +6,7 @@ namespace MalovaniQQ_4ITC_QQMore
     public partial class Form1 : Form
     {
         SaveLoadManager saveLoadManager = new SaveLoadManager();
-        
+        Dictionary<string, Assembly> assemblies = new Dictionary<string, Assembly>();
 
         public Form1()
         {
@@ -28,11 +29,9 @@ namespace MalovaniQQ_4ITC_QQMore
                 canvas1.Height / 2,
                 button1.BackColor,
                 checkBox1.Checked
-                ) as Shape; // :'(
+                ) as Shape;
 
             canvas1.AddShape(newShape);
-
-            //canvas1.AddShape(new Square(canvas1.Width / 2, canvas1.Height / 2, button1.BackColor, checkBox1.Checked));
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -53,6 +52,10 @@ namespace MalovaniQQ_4ITC_QQMore
             Assembly a = Assembly.GetExecutingAssembly();
             LoadShapesFromAssembly(a);
             comboBox1.SelectedIndex = 0;
+
+
+            var assies = saveLoadManager.GetAssembliesFromAppDataFolder();
+            assies.ForEach(a => LoadShapesFromAssembly(a));
         }
 
         private async void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -78,7 +81,7 @@ namespace MalovaniQQ_4ITC_QQMore
             {
                 var path = ofd.FileName;
                 canvas1.ClearShapes();
-                var loadedShapes = await saveLoadManager.LoadShapes(path);
+                var loadedShapes = await saveLoadManager.LoadShapes(path, assemblies);
                 loadedShapes.ForEach(s => canvas1.AddShape(s));
             }
         }
@@ -86,6 +89,7 @@ namespace MalovaniQQ_4ITC_QQMore
         private async void addMoreShapesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
+            ofd.FileName = "C:\\Users\\vrati\\source\\repos\\MalovaniQQ_4ITC_QQMore\\MyNewShapes\\bin\\Debug\\net8.0-windows";
             ofd.Filter = "Shapes library|*.dll";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
@@ -100,7 +104,11 @@ namespace MalovaniQQ_4ITC_QQMore
         {
             var types = ass.GetTypes();
             var filtered = types.ToList().Where(t => t.IsSubclassOf(typeof(Shape)));
-            filtered.ToList().ForEach(t => comboBox1.Items.Add(t));
+            filtered.ToList().ForEach(t => {
+                assemblies.Add(t.FullName, ass);
+                comboBox1.Items.Add(t); 
+            });
+
         }
     }
 }

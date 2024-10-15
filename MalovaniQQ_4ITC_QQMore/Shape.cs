@@ -102,7 +102,7 @@ namespace MalovaniQQ_4ITC_QQMore
             public int b;
             public bool filled;
 
-            public Type type;
+            public string type;
 
             public ShapeDTO()
             {
@@ -118,7 +118,7 @@ namespace MalovaniQQ_4ITC_QQMore
                 this.g = s.color.G;
                 this.b = s.color.B;
                 this.filled = s.filled;
-                this.type = s.GetType();
+                this.type = s.GetType().FullName;
             }
         }
     }
