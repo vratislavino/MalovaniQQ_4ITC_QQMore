@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Reflection;
 
 namespace MalovaniQQ_4ITC_QQMore
@@ -52,10 +53,6 @@ namespace MalovaniQQ_4ITC_QQMore
             Assembly a = Assembly.GetExecutingAssembly();
             LoadShapesFromAssembly(a);
             comboBox1.SelectedIndex = 0;
-
-
-            var assies = saveLoadManager.GetAssembliesFromAppDataFolder();
-            assies.ForEach(a => LoadShapesFromAssembly(a));
         }
 
         private async void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -104,11 +101,23 @@ namespace MalovaniQQ_4ITC_QQMore
         {
             var types = ass.GetTypes();
             var filtered = types.ToList().Where(t => t.IsSubclassOf(typeof(Shape)));
-            filtered.ToList().ForEach(t => {
+            filtered.ToList().ForEach(t =>
+            {
                 assemblies.Add(t.FullName, ass);
-                comboBox1.Items.Add(t); 
+                comboBox1.Items.Add(t);
             });
 
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            canvas1.ShowNames(checkBox2.Checked);
+        }
+
+        private void loadFromAppDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var assies = saveLoadManager.GetAssembliesFromAppDataFolder();
+            assies.ForEach(a => LoadShapesFromAssembly(a));
         }
     }
 }

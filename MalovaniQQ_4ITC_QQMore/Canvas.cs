@@ -17,6 +17,7 @@ namespace MalovaniQQ_4ITC_QQMore
 
         private Shape highlightedShape;
         private bool holdingShape = false;
+        private bool namesVisible = false;
 
         public Canvas()
         {
@@ -27,6 +28,7 @@ namespace MalovaniQQ_4ITC_QQMore
         public void AddShape(Shape shape)
         {
             shapes.Add(shape);
+            shape.ShowNames(namesVisible);
             Invalidate();
         }
 
@@ -94,6 +96,13 @@ namespace MalovaniQQ_4ITC_QQMore
             {
                 holdingShape = false;
             }
+        }
+
+        public void ShowNames(bool isChecked)
+        {
+            namesVisible = isChecked;
+            shapes.ForEach(s => s.ShowNames(isChecked));
+            Invalidate();
         }
     }
 }

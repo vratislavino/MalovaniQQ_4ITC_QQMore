@@ -48,14 +48,18 @@ namespace MalovaniQQ_4ITC_QQMore
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
             var dirPath = Path.Combine(appDataPath, "ShapesDrawing4ITC");
-            if(!Directory.Exists(dirPath))
+            if (!Directory.Exists(dirPath))
             {
                 Directory.CreateDirectory(dirPath);
             }
             var dllPath = Path.Combine(dirPath, filename);
             Debug.WriteLine(dllPath);
-
-            File.Copy(path, dllPath, true);
+            try {
+                File.Copy(path, dllPath, true);
+            } catch (Exception e)
+            {
+                MessageBox.Show("Nepodařilo se zkopírovat DLL do AppData, nejspíš se DLL právě používá!");
+            }
         }
 
         public List<Assembly> GetAssembliesFromAppDataFolder()

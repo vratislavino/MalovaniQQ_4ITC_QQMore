@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             splitContainer1 = new SplitContainer();
+            checkBox2 = new CheckBox();
             button3 = new Button();
             button2 = new Button();
             button1 = new Button();
@@ -44,6 +45,7 @@
             toolStripStatusLabel1 = new ToolStripStatusLabel();
             canvas1 = new Canvas();
             colorDialog1 = new ColorDialog();
+            loadFromAppDataToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -61,6 +63,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            splitContainer1.Panel1.Controls.Add(checkBox2);
             splitContainer1.Panel1.Controls.Add(button3);
             splitContainer1.Panel1.Controls.Add(button2);
             splitContainer1.Panel1.Controls.Add(button1);
@@ -75,6 +78,18 @@
             splitContainer1.Size = new Size(1294, 856);
             splitContainer1.SplitterDistance = 67;
             splitContainer1.TabIndex = 0;
+            // 
+            // checkBox2
+            // 
+            checkBox2.AutoSize = true;
+            checkBox2.Location = new Point(1072, 36);
+            checkBox2.Name = "checkBox2";
+            checkBox2.RightToLeft = RightToLeft.Yes;
+            checkBox2.Size = new Size(114, 24);
+            checkBox2.TabIndex = 6;
+            checkBox2.Text = "Show names";
+            checkBox2.UseVisualStyleBackColor = true;
+            checkBox2.CheckedChanged += checkBox2_CheckedChanged;
             // 
             // button3
             // 
@@ -138,7 +153,7 @@
             // 
             // fileToolStripMenuItem
             // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { saveToolStripMenuItem, loadToolStripMenuItem, addMoreShapesToolStripMenuItem });
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { saveToolStripMenuItem, loadToolStripMenuItem, addMoreShapesToolStripMenuItem, loadFromAppDataToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new Size(46, 24);
             fileToolStripMenuItem.Text = "File";
@@ -146,21 +161,21 @@
             // saveToolStripMenuItem
             // 
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new Size(224, 26);
+            saveToolStripMenuItem.Size = new Size(225, 26);
             saveToolStripMenuItem.Text = "Save";
             saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
             // 
             // loadToolStripMenuItem
             // 
             loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            loadToolStripMenuItem.Size = new Size(224, 26);
+            loadToolStripMenuItem.Size = new Size(225, 26);
             loadToolStripMenuItem.Text = "Load";
             loadToolStripMenuItem.Click += loadToolStripMenuItem_Click;
             // 
             // addMoreShapesToolStripMenuItem
             // 
             addMoreShapesToolStripMenuItem.Name = "addMoreShapesToolStripMenuItem";
-            addMoreShapesToolStripMenuItem.Size = new Size(224, 26);
+            addMoreShapesToolStripMenuItem.Size = new Size(225, 26);
             addMoreShapesToolStripMenuItem.Text = "Add more shapes";
             addMoreShapesToolStripMenuItem.Click += addMoreShapesToolStripMenuItem_Click;
             // 
@@ -196,6 +211,13 @@
             canvas1.Name = "canvas1";
             canvas1.Size = new Size(1294, 785);
             canvas1.TabIndex = 0;
+            // 
+            // loadFromAppDataToolStripMenuItem
+            // 
+            loadFromAppDataToolStripMenuItem.Name = "loadFromAppDataToolStripMenuItem";
+            loadFromAppDataToolStripMenuItem.Size = new Size(225, 26);
+            loadFromAppDataToolStripMenuItem.Text = "Load from AppData";
+            loadFromAppDataToolStripMenuItem.Click += loadFromAppDataToolStripMenuItem_Click;
             // 
             // Form1
             // 
@@ -238,5 +260,7 @@
         private StatusStrip statusStrip1;
         private ToolStripProgressBar toolStripProgressBar1;
         private ToolStripStatusLabel toolStripStatusLabel1;
+        private CheckBox checkBox2;
+        private ToolStripMenuItem loadFromAppDataToolStripMenuItem;
     }
 }

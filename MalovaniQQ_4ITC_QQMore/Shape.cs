@@ -27,6 +27,9 @@ namespace MalovaniQQ_4ITC_QQMore
 
         public int mouseDragOffsetX;
         public int mouseDragOffsetY;
+        private bool showNames = false;
+        private static Font assFont;
+        private static Font typeFont;
 
         public Shape(int x, int y, Color color, bool filled)
         {
@@ -35,12 +38,9 @@ namespace MalovaniQQ_4ITC_QQMore
             this.x = x - width/2;
             this.y = y - height/2;
             this.color = color;
-            this.pen = new Pen(color, 8);
-            this.brush = new SolidBrush(color);
             this.filled = filled;
 
-            outlinePen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-            outlinePen.DashPattern = new float[] { 5, 5 };
+            InitRuntimeValues();
         }
 
         public Shape(ShapeDTO dto)
@@ -50,10 +50,16 @@ namespace MalovaniQQ_4ITC_QQMore
             this.width = dto.width;
             this.height = dto.height;
             this.color = Color.FromArgb(dto.r, dto.g, dto.b);
+            this.filled = dto.filled;
+            InitRuntimeValues();
+        }
+
+        private void InitRuntimeValues()
+        {
             this.pen = new Pen(color, 8);
             this.brush = new SolidBrush(color);
-            this.filled = dto.filled;
-
+            assFont = new Font("Arial", 10, FontStyle.Regular);
+            typeFont = new Font("Arial", 11, FontStyle.Bold);
             outlinePen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
             outlinePen.DashPattern = new float[] { 5, 5 };
         }
@@ -64,6 +70,25 @@ namespace MalovaniQQ_4ITC_QQMore
             {
                 g.DrawRectangle(outlinePen, x-outlineOffset, y-outlineOffset, width+2*outlineOffset, height+2*outlineOffset);
             }
+            if(showNames)
+                DrawName(g);
+        }
+
+        public void ShowNames(bool show)
+        {
+            this.showNames = show;
+        }
+
+        private void DrawName(Graphics g)
+        {
+            string assText= GetType().Assembly.GetName().Name;
+            string typeText = GetType().Name;   
+            SizeF assSize = g.MeasureString(assText, assFont);
+            SizeF typeSize = g.MeasureString(typeText, typeFont);
+            
+
+            g.DrawString(assText, assFont, Brushes.DarkGray, x + width/2 - assSize.Width/2, y+height);
+            g.DrawString(typeText, assFont, Brushes.Black, x + width/2 - typeSize.Width/2, y+height+assSize.Height + 2);
         }
 
         public abstract bool IsMouseOver(int mx, int my);
