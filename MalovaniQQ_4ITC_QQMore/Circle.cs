@@ -15,7 +15,7 @@ namespace MalovaniQQ_4ITC_QQMore
 
         public Circle(ShapeDTO dto) : base(dto) { }
 
-        public override void Draw(Graphics g)
+        protected override void DrawShape(Graphics g)
         {
             if(filled)
             {
@@ -24,7 +24,6 @@ namespace MalovaniQQ_4ITC_QQMore
             {
                 g.DrawEllipse(pen, x, y, width, height);
             }
-            base.Draw(g);
         }
 
         public override void DoYourThing()

@@ -11,7 +11,7 @@ namespace MyNewShapes
 
         public Triangle(ShapeDTO dto) : base(dto) { }
 
-        public override void Draw(Graphics g)
+        protected override void DrawShape(Graphics g)
         {
             Point[] points = new Point[3] {
                 new Point(x, y + height),

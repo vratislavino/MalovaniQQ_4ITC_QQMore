@@ -12,6 +12,19 @@ namespace MalovaniQQ_4ITC_QQMore
         public Form1()
         {
             InitializeComponent();
+            canvas1.ShapesChanged += UpdateShapeList;
+        }
+
+        private void UpdateShapeList()
+        {
+            checkedListBox1.Items.Clear();
+            canvas1.Shapes.ForEach(s =>
+            {
+                checkedListBox1.Items.Add(new CheckListBoxItem()
+                {
+                    shape = s
+                }, true);
+            });
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -118,6 +131,34 @@ namespace MalovaniQQ_4ITC_QQMore
         {
             var assies = saveLoadManager.GetAssembliesFromAppDataFolder();
             assies.ForEach(a => LoadShapesFromAssembly(a));
+        }
+
+        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var item = checkedListBox1.SelectedItem;
+            if (item != null)
+            {
+                canvas1.HighlightShape((item as CheckListBoxItem).shape, true);
+            }
+        }
+
+        private void checkedListBox1_SelectedValueChanged(object sender, EventArgs e)
+        {
+            var item = checkedListBox1.SelectedItem;
+            var isChecked = checkedListBox1.CheckedItems.Contains(item);
+            if (item != null)
+            {
+                canvas1.SetActive((item as CheckListBoxItem).shape, isChecked);
+            }
+        }
+    }
+
+    class CheckListBoxItem {
+        public Shape shape;
+
+        public override string ToString()
+        {
+            return shape.ToString();
         }
     }
 }

@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace MalovaniQQ_4ITC_QQMore
 {
-    [Serializable]
+    /// <summary>
+    /// Abstract class containing basic properties and methods for shapes
+    /// </summary>
     public abstract class Shape
     {
+        /// <summary>
+        /// x coordinate of the shape
+        /// </summary>
         protected int x;
         protected int y;
         protected int width;
@@ -25,12 +30,22 @@ namespace MalovaniQQ_4ITC_QQMore
         protected static Pen outlinePen = new Pen(Color.Black);
         protected static float outlineOffset = 4;
 
+        /// <summary>
+        /// X mouse offset when dragging
+        /// </summary>
         public int mouseDragOffsetX;
         public int mouseDragOffsetY;
         private bool showNames = false;
         private static Font assFont;
         private static Font typeFont;
-
+        private bool isActive = true;
+        /// <summary>
+        /// Constructor that creates Shape from button using parameters
+        /// </summary>
+        /// <param name="x">Center X of a drawing container</param>
+        /// <param name="y">Center Y of a drawing container</param>
+        /// <param name="color">Color of line or brush</param>
+        /// <param name="filled">Whether the shape is filled</param>
         public Shape(int x, int y, Color color, bool filled)
         {
             this.width = 100;
@@ -64,15 +79,31 @@ namespace MalovaniQQ_4ITC_QQMore
             outlinePen.DashPattern = new float[] { 5, 5 };
         }
 
-        public virtual void Draw(Graphics g) { 
-            
-            if(highlighted)
+        /// <summary>
+        /// Method from template DP that draws the shape, outline and names
+        /// </summary>
+        /// <param name="g">Graphics from System.Drawing</param>
+        public void Draw(Graphics g) { 
+            if(!isActive)
+            {
+                return;
+            }
+
+            DrawShape(g);
+
+            if (highlighted)
             {
                 g.DrawRectangle(outlinePen, x-outlineOffset, y-outlineOffset, width+2*outlineOffset, height+2*outlineOffset);
             }
             if(showNames)
                 DrawName(g);
         }
+
+        /// <summary>
+        /// Draws the actual shape
+        /// </summary>
+        /// <param name="g">Graphics from System.Drawing</param>
+        protected abstract void DrawShape(Graphics g);
 
         public void ShowNames(bool show)
         {
@@ -115,6 +146,19 @@ namespace MalovaniQQ_4ITC_QQMore
             return new ShapeDTO(this);
         }
 
+        public override string ToString()
+        {
+            return $"{GetType().Name} [{x},{y}] {color}";
+        }
+
+        internal void SetActive(bool active)
+        {
+            isActive = active;
+        }
+
+        /// <summary>
+        /// Class for data of shape
+        /// </summary>
         [Serializable]
         public class ShapeDTO
         {

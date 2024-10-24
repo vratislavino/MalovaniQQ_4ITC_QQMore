@@ -40,17 +40,23 @@
             saveToolStripMenuItem = new ToolStripMenuItem();
             loadToolStripMenuItem = new ToolStripMenuItem();
             addMoreShapesToolStripMenuItem = new ToolStripMenuItem();
+            loadFromAppDataToolStripMenuItem = new ToolStripMenuItem();
+            splitContainer2 = new SplitContainer();
+            canvas1 = new Canvas();
+            checkedListBox1 = new CheckedListBox();
             statusStrip1 = new StatusStrip();
             toolStripProgressBar1 = new ToolStripProgressBar();
             toolStripStatusLabel1 = new ToolStripStatusLabel();
-            canvas1 = new Canvas();
             colorDialog1 = new ColorDialog();
-            loadFromAppDataToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
             menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer2).BeginInit();
+            splitContainer2.Panel1.SuspendLayout();
+            splitContainer2.Panel2.SuspendLayout();
+            splitContainer2.SuspendLayout();
             statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -73,8 +79,8 @@
             // 
             // splitContainer1.Panel2
             // 
+            splitContainer1.Panel2.Controls.Add(splitContainer2);
             splitContainer1.Panel2.Controls.Add(statusStrip1);
-            splitContainer1.Panel2.Controls.Add(canvas1);
             splitContainer1.Size = new Size(1294, 856);
             splitContainer1.SplitterDistance = 67;
             splitContainer1.TabIndex = 0;
@@ -179,6 +185,52 @@
             addMoreShapesToolStripMenuItem.Text = "Add more shapes";
             addMoreShapesToolStripMenuItem.Click += addMoreShapesToolStripMenuItem_Click;
             // 
+            // loadFromAppDataToolStripMenuItem
+            // 
+            loadFromAppDataToolStripMenuItem.Name = "loadFromAppDataToolStripMenuItem";
+            loadFromAppDataToolStripMenuItem.Size = new Size(225, 26);
+            loadFromAppDataToolStripMenuItem.Text = "Load from AppData";
+            loadFromAppDataToolStripMenuItem.Click += loadFromAppDataToolStripMenuItem_Click;
+            // 
+            // splitContainer2
+            // 
+            splitContainer2.Dock = DockStyle.Fill;
+            splitContainer2.Location = new Point(0, 0);
+            splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            splitContainer2.Panel1.Controls.Add(canvas1);
+            // 
+            // splitContainer2.Panel2
+            // 
+            splitContainer2.Panel2.Controls.Add(checkedListBox1);
+            splitContainer2.Size = new Size(1294, 763);
+            splitContainer2.SplitterDistance = 1060;
+            splitContainer2.TabIndex = 2;
+            // 
+            // canvas1
+            // 
+            canvas1.BackColor = Color.White;
+            canvas1.BorderStyle = BorderStyle.FixedSingle;
+            canvas1.Dock = DockStyle.Fill;
+            canvas1.Location = new Point(0, 0);
+            canvas1.Name = "canvas1";
+            canvas1.Size = new Size(1060, 763);
+            canvas1.TabIndex = 0;
+            // 
+            // checkedListBox1
+            // 
+            checkedListBox1.Dock = DockStyle.Fill;
+            checkedListBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            checkedListBox1.FormattingEnabled = true;
+            checkedListBox1.Location = new Point(0, 0);
+            checkedListBox1.Name = "checkedListBox1";
+            checkedListBox1.Size = new Size(230, 763);
+            checkedListBox1.TabIndex = 0;
+            checkedListBox1.SelectedIndexChanged += checkedListBox1_SelectedIndexChanged;
+            checkedListBox1.SelectedValueChanged += checkedListBox1_SelectedValueChanged;
+            // 
             // statusStrip1
             // 
             statusStrip1.ImageScalingSize = new Size(20, 20);
@@ -202,23 +254,6 @@
             toolStripStatusLabel1.Text = "Saving...";
             toolStripStatusLabel1.Visible = false;
             // 
-            // canvas1
-            // 
-            canvas1.BackColor = Color.White;
-            canvas1.BorderStyle = BorderStyle.FixedSingle;
-            canvas1.Dock = DockStyle.Fill;
-            canvas1.Location = new Point(0, 0);
-            canvas1.Name = "canvas1";
-            canvas1.Size = new Size(1294, 785);
-            canvas1.TabIndex = 0;
-            // 
-            // loadFromAppDataToolStripMenuItem
-            // 
-            loadFromAppDataToolStripMenuItem.Name = "loadFromAppDataToolStripMenuItem";
-            loadFromAppDataToolStripMenuItem.Size = new Size(225, 26);
-            loadFromAppDataToolStripMenuItem.Text = "Load from AppData";
-            loadFromAppDataToolStripMenuItem.Click += loadFromAppDataToolStripMenuItem_Click;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -237,6 +272,10 @@
             splitContainer1.ResumeLayout(false);
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            splitContainer2.Panel1.ResumeLayout(false);
+            splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
+            splitContainer2.ResumeLayout(false);
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
             ResumeLayout(false);
@@ -262,5 +301,7 @@
         private ToolStripStatusLabel toolStripStatusLabel1;
         private CheckBox checkBox2;
         private ToolStripMenuItem loadFromAppDataToolStripMenuItem;
+        private SplitContainer splitContainer2;
+        private CheckedListBox checkedListBox1;
     }
 }

@@ -27,7 +27,7 @@ namespace MalovaniQQ_4ITC_QQMore
                 && my <= y + height;
         }
 
-        public override void Draw(Graphics g)
+        protected override void DrawShape(Graphics g)
         {
             if (filled)
             {
@@ -36,7 +36,6 @@ namespace MalovaniQQ_4ITC_QQMore
             {
                 g.DrawRectangle(pen, x, y, width, height);
             }
-            base.Draw(g);
         }
     }
 }
